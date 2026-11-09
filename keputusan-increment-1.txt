@@ -1,0 +1,85 @@
+Draf ini saya jadikan dasar spesifikasi Increment 1, dengan keputusan berikut untuk menutup persoalan yang masih terbuka.
+
+## 1. Lingkup
+
+Tetap fokus Informasi Kampus dan fondasi akun.
+
+Semua konten memerlukan login dan dapat dibaca seluruh anggota aktif. Belum ada pembatasan konten berdasarkan prodi/unit.
+
+Notifikasi, informasi tersimpan/favorit, komentar, reaksi, dan impor Excel tidak termasuk Increment 1. Sesuaikan daftar layar dan navigasi dengan lingkup ini; jangan menambahkan menu kosong untuk fitur yang tidak disepakati.
+
+Empat modul mendatang tetap hanya kartu “Belum tersedia”.
+
+## 2. Akses administrator
+
+- Administrator memiliki kemampuan membaca informasi seperti Anggota.
+- Satu akun dapat memiliki beberapa penugasan.
+- Superadmin mengelola akun administrator dan penugasan role.
+- Superadmin tidak otomatis mendapatkan seluruh kemampuan pengelolaan modul. Jika perlu mengelola informasi atau data induk, berikan penugasan Admin Informasi atau Admin Akun secara eksplisit.
+- Superadmin dapat mencabut penugasan administrator.
+- Sistem harus mencegah Superadmin aktif terakhir kehilangan seluruh akses Superadmin atau dinonaktifkan tanpa pengganti.
+- Admin Akun hanya mengelola status akun Anggota; tidak boleh menonaktifkan administrator melalui jalur pengelolaan Anggota.
+
+## 3. Pengelolaan konten
+
+- Berita dan pengumuman memiliki judul, isi, serta kategori.
+- Agenda juga memiliki waktu kegiatan dan lokasi atau keterangan pelaksanaan daring.
+- Gambar sampul opsional.
+- Maksimal satu lampiran PDF opsional per konten untuk versi awal.
+- Batas awal: gambar 2 MB dan PDF 5 MB, dapat diubah melalui konfigurasi.
+- Status konten: Draf, Terbit, Diarsipkan.
+- Konten terbit dapat diedit atau diarsipkan oleh Admin Informasi, dengan pencatatan perubahan.
+- Tidak perlu mengembalikan konten terbit menjadi draf pada versi awal.
+- Penghapusan memakai soft delete, dengan konfirmasi. Jangan menyediakan hard delete melalui aplikasi.
+- Konten draf, arsip, dan terhapus tidak dapat dibuka Anggota, termasuk lampirannya.
+
+## 4. Akun dan pemulihan
+
+- Registrasi tetap menggunakan identitas dan email yang cocok dengan data induk aktif.
+- Pengguna mengisi password sebelum meminta OTP.
+- Konfigurasi awal OTP: 6 digit, berlaku 5 menit, maksimal 5 percobaan per challenge, jeda kirim ulang 60 detik.
+- Terapkan pembatasan di backend. OTP baru membatalkan kode lama; pengiriman ulang tidak boleh menghapus pembatasan penyalahgunaan.
+- Tidak ada login otomatis setelah registrasi.
+- Perubahan email atau kehilangan akses email ditangani melalui bantuan Admin Akun dan pemeriksaan identitas; belum ada penggantian email mandiri.
+- Mengaktifkan kembali data induk tidak otomatis mengaktifkan akun yang dinonaktifkan secara terpisah. Akses hanya diberikan jika data induk dan akun sama-sama aktif.
+- Pemulihan password tidak mengaktifkan kembali akun nonaktif.
+- Email pengujian ditentukan ketika backend dikerjakan. Jangan membuat OTP tetap atau bypass produksi.
+
+Ketentuan yang berkaitan dengan kebijakan keanggotaan kampus tetap dicatat sebagai rancangan sementara yang perlu dikonfirmasi.
+
+## 5. Riwayat
+
+Catat tindakan administratif penting: perubahan data induk, status akun, penugasan role, serta pembuatan, perubahan, publikasi, pengarsipan, dan penghapusan konten.
+
+Jangan mencatat password, OTP, atau token. Belum ada penghapusan otomatis riwayat; kebijakan retensi resmi ditetapkan kemudian.
+
+## 6. Lingkungan dan desain
+
+- Nama aplikasi: Polteksibisa.
+- Folder utama tetap `polteksibisa2`.
+- Desain dominan merah tua dan putih.
+- Gunakan logo asli jika tersedia; sementara boleh memakai placeholder teks.
+- Laptop Windows 11 RAM 8 GB; pengujian pada HP Android Motorola G67 5G tanpa emulator.
+- PHP yang tersedia 8.2.12. Jangan mengasumsikan kompatibel dengan semua versi Laravel. Catat pilihan versi atau kebutuhan peningkatan PHP untuk dibahas sebelum backend dibuat.
+- Tidak menggunakan Hostinger.
+- Backend awal lokal. Akses internet sementara dan deployment operasional merupakan pekerjaan terpisah.
+- Jangan membeli layanan.
+
+## 7. Tugas Anda sekarang: rencana, bukan implementasi
+
+Tampilkan spesifikasi ringkas yang sudah diperbarui, lalu susun rencana pengerjaan bertahap.
+
+Untuk setiap tahap, tuliskan:
+1. Tujuan dan lingkup.
+2. Prasyarat.
+3. Desain atau aset yang perlu saya sediakan.
+4. Hasil yang akan dibuat.
+5. Cara memeriksa hasil, termasuk pada HP jika relevan.
+6. Kriteria selesai.
+7. Batas berhenti sebelum tahap berikutnya.
+
+Pisahkan perencanaan kebutuhan, desain, pemeriksaan lingkungan, penyiapan Expo, implementasi UI, backend, integrasi, pengujian, dan build.
+
+Jelaskan kapan gambar desain harus saya taruh dan di folder mana. Mulai desain dari Beranda Anggota; daftar layar lain direncanakan terlebih dahulu agar konsisten.
+
+**Pada balasan ini jangan menjalankan terminal, membuat berkas, menginstal, atau menulis kode aplikasi. Setelah rencana selesai, berhenti dan tunggu saya menentukan tahap yang akan dijalankan.**

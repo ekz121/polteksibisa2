@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Polteksibisa",
+    "slug": "polteksibisa",
+    "version": "0.1.0",
+    "orientation": "default",
+    "icon": "./assets/images/app-icon.png",
+    "scheme": "polteksibisa",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FAF7F8",
+    "android": { "predictiveBackGestureEnabled": true },
+    "web": { "output": "static", "favicon": "./assets/images/logo-kampus.png" },
+    "plugins": [
+      "expo-router",
+      ["expo-splash-screen", { "backgroundColor": "#FFFFFF", "image": "./assets/images/logo-kampus.png", "imageWidth": 120 }]
+    ],
+    "experiments": { "typedRoutes": true }
+  }
+}
