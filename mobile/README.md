@@ -1,6 +1,6 @@
 # Polteksibisa mobile
 
-Pratinjau Beranda Anggota dengan React Native, Expo SDK 57, TypeScript, dan Expo Router. Seluruh identitas serta konten merupakan data dummy. Belum ada autentikasi, backend, database, atau halaman administrator.
+Pratinjau Beranda Anggota dengan React Native, Expo SDK 58, TypeScript, dan Expo Router. Seluruh identitas serta konten merupakan data dummy. Belum ada autentikasi, backend, database, atau halaman administrator.
 
 ## Menjalankan di Windows
 
@@ -17,16 +17,24 @@ Jika kelak memasang ulang dependensi dari lockfile, jalankan `npm.cmd ci` di dir
 
 ## Membuka pada Motorola G67 5G
 
-1. Pasang Expo Go Android. SDK proyek adalah 57; versi Expo Go harus cocok.
+1. Pasang Expo Go Android untuk SDK 58; versi proyek dan Expo Go harus cocok.
 2. Sambungkan laptop dan HP ke jaringan Wi-Fi yang sama. Alternatifnya, aktifkan hotspot HP lalu sambungkan laptop ke hotspot tersebut.
 3. Jalankan `npm.cmd start` dari folder `mobile`.
 4. Buka Expo Go, pilih pemindaian QR, lalu pindai QR pada terminal. Jika perlu, tekan `E` pada terminal untuk menampilkan ulang QR.
 5. Jika memilih masukan URL manual di Expo Go, gunakan alamat `exp://...` yang dicetak terminal, bukan `localhost`.
 6. Tunggu bundel pertama selesai. Pada pemakaian pertama, Expo Go dapat menampilkan petunjuk pengembang sebelum Beranda.
 
-Jika muncul pesan versi tidak kompatibel, pilih SDK 57 dan Android pada [halaman resmi Expo Go](https://expo.dev/go?sdkVersion=57&platform=android), lalu ikuti petunjuk instalasi versi yang cocok. Jangan mengubah versi paket secara acak.
+Jika muncul pesan versi tidak kompatibel, pastikan Expo Go mendukung SDK 58. Pilihan versi Android tersedia pada [halaman resmi Expo Go](https://expo.dev/go?sdkVersion=58&platform=android). Jangan mengubah versi paket secara acak.
 
-Pemilihan SDK mengikuti [panduan resmi pembuatan proyek Expo](https://docs.expo.dev/get-started/create-a-project/), yang pada saat penyiapan menyarankan SDK 57 untuk Expo Go pada perangkat fisik. [Penjelasan kecocokan versi Expo Go](https://docs.expo.dev/troubleshooting/expo-go-version-mismatch/).
+Proyek diperbarui dari SDK 57 ke SDK 58 mengikuti [panduan resmi upgrade Expo](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/) agar cocok dengan Expo Go SDK 58 pada HP pengguna. [Penjelasan kecocokan versi Expo Go](https://docs.expo.dev/troubleshooting/expo-go-version-mismatch/). Rincian upgrade dan titik pemulihan ada di [UPGRADE-SDK58.md](./UPGRADE-SDK58.md).
+
+Setelah upgrade, hentikan Metro lama dengan Ctrl+C, lalu jalankan dari folder `mobile`:
+
+```powershell
+npm.cmd start -- --clear
+```
+
+Pindai QR baru dari terminal; jangan membuka tautan sesi SDK 57 yang lama.
 
 ## Mencoba Beranda
 
@@ -84,6 +92,7 @@ Tidak ada tunnel, emulator, Android Studio, Docker, cloud build, atau layanan be
 | Berkas | Kegunaan |
 | --- | --- |
 | `src/app/_layout.tsx` | Fondasi Expo Router dan safe-area provider |
+| `src/app/_layout.web.tsx`, `src/safe-area.css` | Penyesuaian safe area browser untuk SDK 58 |
 | `src/app/index.tsx` | Route utama yang menampilkan Beranda |
 | `src/screens/HomeScreen.tsx` | Susunan header, kartu layanan, daftar informasi, navigasi bawah |
 | `src/data/home.ts` | Nama dummy, teks kampus, layanan, informasi, isi modal, dan pesan menu |

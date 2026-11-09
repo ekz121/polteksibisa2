@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useRef, useState, useSyncExternalStore } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, View, useWindowDimensions, type ScrollViewInstance } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
 
@@ -125,7 +125,7 @@ export default function HomeScreen() {
   // Snapshot server menjaga kontrol web tetap menunggu hidrasi; native langsung siap.
   const ready = useSyncExternalStore(subscribeToHydration, clientReady, serverReady);
   const [dialog, setDialog] = useState<DialogContent | null>(null);
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const insets = useSafeAreaInsets();
   const { width, fontScale } = useWindowDimensions();
   const singleColumn = width < 340 || fontScale > 1.25;

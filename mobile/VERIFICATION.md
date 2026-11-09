@@ -1,5 +1,7 @@
 # Hasil pemeriksaan pratinjau Beranda
 
+Dokumen ini menyimpan hasil awal pada SDK 57. Hasil terbaru setelah upgrade ke SDK 58 dicatat di [UPGRADE-SDK58.md](./UPGRADE-SDK58.md).
+
 Tanggal pencatatan: 9 November 2026. Pemeriksaan dijalankan pada laptop Windows, bukan pada HP pengguna.
 
 ## Lingkungan yang ditemukan
