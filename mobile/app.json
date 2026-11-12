@@ -8,12 +8,38 @@
     "scheme": "polteksibisa",
     "userInterfaceStyle": "light",
     "backgroundColor": "#FAF7F8",
-    "android": { "predictiveBackGestureEnabled": true },
-    "web": { "output": "static", "favicon": "./assets/images/logo-kampus.png" },
+    "android": {
+      "package": "com.polteksibisa.preview",
+      "predictiveBackGestureEnabled": true
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/logo-kampus.png"
+    },
     "plugins": [
       "expo-router",
-      ["expo-splash-screen", { "backgroundColor": "#FFFFFF", "image": "./assets/images/logo-kampus.png", "imageWidth": 120 }]
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/images/logo-kampus.png",
+          "imageWidth": 120
+        }
+      ],
+      "expo-status-bar"
     ],
-    "experiments": { "typedRoutes": true }
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "a2c01e90-07ad-451c-a1f9-ef20e4e2a4e9"
+      }
+    }
   }
 }

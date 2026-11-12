@@ -7,7 +7,7 @@ Pratinjau Beranda Anggota dengan React Native, Expo SDK 58, TypeScript, dan Expo
 Dependensi sudah dipasang. Buka terminal PowerShell VS Code:
 
 ```powershell
-cd C:\Users\ASUS\Downloads\kuliah\polteksibisa2\mobile
+Set-Location 'D:\polteksibisa2\mobile'
 npm.cmd start
 ```
 
@@ -77,7 +77,7 @@ Remove-Item Env:REACT_NATIVE_PACKAGER_HOSTNAME -ErrorAction SilentlyContinue
 
 6. Jika port 8081 sedang dipakai, hentikan server Expo lama dengan Ctrl+C. Sebagai alternatif, jalankan `npm.cmd start -- --port 8083`, lalu pindai QR baru; gunakan port 8083 juga saat memeriksa `/status`.
 
-Tidak ada tunnel, emulator, Android Studio, Docker, cloud build, atau layanan berbayar yang disiapkan. HP yang berada jauh dari laptop dan berbeda jaringan belum termasuk jalur pengujian ini.
+Jalur Expo Go di atas memakai LAN. Tidak ada tunnel, emulator, Android Studio, Docker, atau layanan berbayar yang disiapkan. Konfigurasi cloud build APK pratinjau dijelaskan di bawah; Expo Go tetap dapat dipakai seperti biasa.
 
 ## Menghentikan dan menjalankan ulang
 
@@ -139,3 +139,38 @@ npx.cmd expo export --platform android --output-dir dist/android
 ```
 
 Perintah tersebut membuat bundel JavaScript/aset Android lokal untuk pemeriksaan Metro, bukan APK atau cloud build. Ringkasan hasil dan batas pemeriksaan ada di `VERIFICATION.md`.
+
+## APK Android pratinjau Tahap 01
+
+Status 12 November 2026: **build APK berhasil**, status EAS `FINISHED`, selesai pukul 09.43 WIB. [Unduh APK pratinjau (97,6 MB)](https://expo.dev/artifacts/eas/TQdSmjmUUZjxYdwZdIPxRMCT3F4aZpOrqpsjLC-FmRA.apk) atau buka [halaman build](https://expo.dev/accounts/zeinn/projects/polteksibisa/builds/19107637-cb41-4fa6-803c-5fe358fd1c82). Tautan diuji: HTTP HEAD 200 dan unduh parsial HTTP 206 dengan signature ZIP/APK. APK belum diuji pada HP fisik. Metadata EAS mencatat kedaluwarsa build 26 November 2026 pukul 09.23 WIB; unduh dan simpan salinannya sebelum itu. Hasil pemeriksaan terbaru dicatat di [laporan build APK](../docs/LAPORAN-BUILD-APK-PRATINJAU.md); hasil dalam VERIFICATION.md dan UPGRADE-SDK58.md adalah riwayat pemeriksaan sebelumnya.
+
+APK ini hanya pratinjau dashboard/Beranda Tahap 01. Data dan identitas masih dummy. Belum ada login sebenarnya, backend/database, OTP/email, atau halaman admin. SIhadir, SIMASET, SIGAP, dan SIPAS tetap **Belum tersedia**. Gambar di `design/screens` merupakan referensi, bukan layar aplikasi yang otomatis tersedia.
+
+`eas.json` hanya mempunyai profile `preview`, dengan `distribution: internal`, environment `preview`, dan `android.buildType: apk`. Tidak ada profile production. Identifier Android sementara adalah `com.polteksibisa.preview`; identifier ini harus dikonfirmasi sebelum rilis resmi. Nama Polteksibisa, ikon, splash, warna, dan major Expo SDK 58 dipertahankan.
+
+Jalankan dari PowerShell:
+
+```powershell
+Set-Location 'D:\polteksibisa2\mobile'
+npx.cmd eas-cli@latest whoami
+# Jika belum login, pengguna menjalankan ini sendiri:
+npx.cmd eas-cli@latest login
+# Setelah identitas berhasil diperiksa:
+npx.cmd eas-cli@latest whoami
+npx.cmd eas-cli@latest build --platform android --profile preview
+```
+
+Gunakan akun Expo milik Anda dan jalur gratis yang tersedia. Jika kuota gratis habis atau diminta mengaktifkan layanan berbayar, hentikan; jangan membeli layanan. Build pertama dapat menghubungkan/membuat proyek Expo pada akun yang login dan menghasilkan `extra.eas.projectId` di app.json. ID proyek bukan secret. Keystore penandatanganan dapat dikelola di server Expo; jangan menyimpan credential, token, password, atau keystore di source/Git. Jangan mengirim kredensial lewat chat.
+
+Konfigurasi ini ditujukan menghasilkan APK mandiri dengan bundel aplikasi di dalamnya, tanpa Metro/Expo Go saat digunakan. Itu baru dapat dipastikan setelah build cloud selesai dan diuji di HP. Tidak perlu memasang Android Studio, JDK, SDK, ADB, atau emulator lokal untuk jalur cloud ini. Status berhasil hanya boleh dicatat setelah build selesai dan tautan artefak APK tersedia. [Panduan resmi build APK](https://docs.expo.dev/build-reference/apk/).
+
+### Mengunduh dan memasang APK
+
+1. Buka [tautan APK](https://expo.dev/artifacts/eas/TQdSmjmUUZjxYdwZdIPxRMCT3F4aZpOrqpsjLC-FmRA.apk) di browser HP untuk mengunduh berkas `.apk`, atau pilih Install/Download pada [halaman build](https://expo.dev/accounts/zeinn/projects/polteksibisa/builds/19107637-cb41-4fa6-803c-5fe358fd1c82).
+2. Buka berkas dari Downloads/Unduhan. Jika Android meminta izin, buka Setelan pada dialog, lalu aktifkan **Izinkan dari sumber ini** untuk browser atau aplikasi Files yang membuka APK. Menu dapat bernama **Aplikasi > Akses aplikasi khusus > Instal aplikasi tidak dikenal**, tergantung versi Android.
+3. Kembali ke berkas APK, ketuk **Instal**, lalu **Buka** untuk menjalankan Polteksibisa. Setelah selesai, izin instalasi dari sumber tersebut dapat dinonaktifkan kembali.
+4. Coba gulir Beranda, kartu pengumuman/agenda dummy, dialog empat layanan, navigasi bawah, tombol kembali Android, orientasi layar, dan ukuran font besar. Halaman daftar informasi/akun serta notifikasi hanya menampilkan penjelasan statusnya.
+
+Jika Android menampilkan pembatasan khusus developer tidak terverifikasi, izin sumber di atas mungkin belum cukup. Ikuti [panduan resmi Android](https://support.google.com/android/answer/17588095?hl=id); alur tersebut dapat memerlukan waktu tunggu 24 jam. Hal ini bergantung pada perangkat dan kebijakan Android yang diterapkan.
+
+Untuk menjalankan kembali melalui Expo Go, hubungkan HP dan laptop ke jaringan yang sama, jalankan `npm.cmd start -- --clear` dari `D:\polteksibisa2\mobile`, lalu pindai QR memakai Expo Go yang mendukung SDK 58. APK dan Expo Go adalah dua cara membuka pratinjau yang sama.
